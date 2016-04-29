@@ -1,16 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
-using myAddon.Modes;
 using EloBuddy;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Utils;
+using myAddon.Modes;
+
+#endregion
 
 namespace myAddon
 {
     public static class ModeManager
     {
-        private static List<ModeBase> Modes { get; set; }
-
         static ModeManager()
         {
             // Initialize properties
@@ -33,6 +35,8 @@ namespace myAddon
             // Listen to events we need
             Game.OnTick += OnTick;
         }
+
+        private static List<ModeBase> Modes { get; }
 
         public static void Initialize()
         {

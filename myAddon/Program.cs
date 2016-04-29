@@ -1,8 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using EloBuddy;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
 using SharpDX;
+
+#endregion
+
 namespace myAddon
 {
     public static class Program
@@ -10,6 +15,7 @@ namespace myAddon
         // Change this line to the champion you want to make the addon for,
         // watch out for the case being correct!
         public const string ChampName = "Annie";
+
         public static void Main(string[] args)
         {
             Loading.OnLoadingComplete += OnLoadingComplete;
@@ -25,7 +31,7 @@ namespace myAddon
                 return;
             }
             // Initialize the classes that we need
-                        // Initialize the menu
+            // Initialize the menu
             Config.Initialize();
             SpellManager.Initialize();
             ModeManager.Initialize();

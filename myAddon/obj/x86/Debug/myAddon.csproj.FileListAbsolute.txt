@@ -1,0 +1,11 @@
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\ConsoleApplication.exe.config
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\ConsoleApplication.exe
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\ConsoleApplication.pdb
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\EloBuddy.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\EloBuddy.SDK.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\SharpDX.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\bin\Debug\EloBuddy.Sandbox.dll
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\Admin\Documents\Visual Studio 2015\Projects\obj\x86\Debug\ConsoleApplication.pdb

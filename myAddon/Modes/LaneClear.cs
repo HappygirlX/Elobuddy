@@ -1,4 +1,8 @@
-﻿using EloBuddy.SDK;
+﻿#region
+
+using EloBuddy.SDK;
+
+#endregion
 
 namespace myAddon.Modes
 {

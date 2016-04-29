@@ -1,4 +1,9 @@
-﻿using Settings = myAddon.Config.Misc;
+﻿#region
+
+using Settings = myAddon.Config.Misc;
+
+#endregion
+
 namespace myAddon.Modes
 {
     public sealed class PermaActive : ModeBase
@@ -11,7 +16,6 @@ namespace myAddon.Modes
 
         public override void Execute()
         {
-        	
         }
     }
 }
