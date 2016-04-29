@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Drawing;
 using EloBuddy;
@@ -172,10 +172,11 @@ namespace myAddon
            }
         }
           	
- public static class Misc
+ 		public static class Misc
             {
               private static readonly CheckBox _useE;
-                private static readonly CheckBox _stacks;
+              private static readonly CheckBox _stacks;
+              private static readonly Menu Menu;
                 public static bool UseE
                 {
                     get { return _useE.CurrentValue; }
@@ -186,9 +187,9 @@ namespace myAddon
                 }
                 static Misc()
                 {
-                    var menu = Config.Menu.AddSubMenu("Misc","misc");
-                    _useE = menu.Add("autoE", new CheckBox("Auto E"));
-                    _stacks = menu.Add("autoStacks", new CheckBox("Auto Stacks"));
+                    Menu = Config.Menu.AddSubMenu("Misc","misc");
+                    _useE = Menu.Add("autoE", new CheckBox("Auto E"));
+                    _stacks = Menu.Add("autoStacks", new CheckBox("Auto Stacks"));
                 }
  
                 public static void Initialize()
@@ -197,11 +198,12 @@ namespace myAddon
            }
          public static class Draws
             {
-             private const int BarWidth = 106;
+             	private const int BarWidth = 106;
                 private static readonly CheckBox _drawdmg;
                 private const int LineThickness = 10;
                 private static Vector2 BarOffset = new Vector2(0, 16);
                 private static Color _drawingColor;
+                private static readonly Menu Menu;
                 public static Color DrawingColor
                 {
                     get { return _drawingColor; }
@@ -231,8 +233,8 @@ namespace myAddon
                 }
                 static Draws()
                 {
-                    var menu = Config.Menu.AddSubMenu("Draws","draw");
-                    _drawdmg = menu.Add("drawDmg", new CheckBox("Draw Dmg"));
+                    Menu = Config.Menu.AddSubMenu("Draws","draw");
+                    _drawdmg = Menu.Add("drawDmg", new CheckBox("Draw Dmg"));
                 }
  
              public static void Initialize()
