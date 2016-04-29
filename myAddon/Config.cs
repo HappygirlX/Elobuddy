@@ -19,7 +19,7 @@ namespace myAddon
     {
         private const string MenuName = "Annie";
 
-        private static readonly Menu Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
+        private static readonly Menu Menu = MainMenu.AddMenu(displayName: MenuName, uniqueMenuId: MenuName.ToLower());
 
         static Config()
         {

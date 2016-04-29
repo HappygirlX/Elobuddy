@@ -17,11 +17,7 @@ namespace myAddon.Modes
             if (Q.IsReady() && Settings.UseQ)
             {
             	var target = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, Player.Instance.Position, Q.Range).Where(minion => minion.Health <= Player.Instance.GetSpellDamage(minion,SpellSlot.Q));
-            	if (target == null)
-            	{
-            		return;
-            	}
-            	if (!Player.HasBuff("pyromania_particle"))
+                if (!Player.HasBuff("pyromania_particle"))
             	{
             		Orbwalker.DisableAttacking = true;
             		Q.Cast(target.First());
