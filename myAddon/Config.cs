@@ -167,38 +167,41 @@ namespace myAddon
                 {
                 }
            }
-         public static class Draws
+
+        private static class Draws
             {
              	private const int BarWidth = 106;
                 private static readonly CheckBox _drawdmg;
                 private const int LineThickness = 10;
                 private static Vector2 BarOffset = new Vector2(0, 16);
-                private static Color _drawingColor;
 
-             public static Color DrawingColor
+            private static Color DrawingColor
                 {
-                    get { return _drawingColor; }
-                    set { _drawingColor = Color.FromArgb(170, value); }
+                set { Color.FromArgb(170, value); }
                 }
                 private static Color _drawQ;
-                public static Color  DrawQ
+
+            private static Color  DrawQ
                 {
                     get { return _drawQ; }
                     set { _drawQ = Color.FromArgb(170, value); }
                 }
                 private static Color _drawW;
-                public static Color  DrawW
+
+            private static Color  DrawW
                 {
                     get { return _drawW; }
                     set { _drawW = Color.FromArgb(170, value); }
                 }
                 private static Color _drawR;
-                public static Color  DrawR
+
+            private static Color  DrawR
                 {
                     get { return _drawR; }
                     set { _drawR = Color.FromArgb(170, value); }
                 }
-                public static bool DrawDmg => _drawdmg.CurrentValue;
+
+            private static bool DrawDmg => _drawdmg.CurrentValue;
 
              static Draws()
                 {
