@@ -8,22 +8,12 @@ namespace myAddon.Modes
         // here to have full features of that spells, if you don't need that,
         // just change it to Spell.SpellBase, this way it's dynamic with still
         // the most needed functions
-        protected Spell.Targeted Q
-        {
-            get { return SpellManager.Q; }
-        }
-        protected Spell.Skillshot W
-        {
-            get { return SpellManager.W; }
-        }
-        protected Spell.Active E
-        {
-            get { return SpellManager.E; }
-        }
-        protected Spell.Skillshot R
-        {
-            get { return SpellManager.R; }
-        }
+        protected Spell.Targeted Q => SpellManager.Q;
+
+        protected Spell.Skillshot W => SpellManager.W;
+
+        protected Spell.Active E => SpellManager.E;
+        protected Spell.Skillshot R => SpellManager.R;
 
         public abstract bool ShouldBeExecuted();
 

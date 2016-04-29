@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Linq;
-using System.Drawing;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
@@ -20,12 +19,11 @@ namespace myAddon
     {
         private const string MenuName = "Annie";
 
-        private static readonly Menu Menu;
+        private static readonly Menu Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
 
         static Config()
         {
             // Initialize the menu
-            Menu = MainMenu.AddMenu(MenuName, MenuName + "_HappyGirl");
 
             // Initialize the modes
             Modes.Initialize();
@@ -63,18 +61,11 @@ namespace myAddon
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _useR;
 
-                public static bool UseQ
-                {
-                    get { return _useQ.CurrentValue; }
-                }
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
-                }
-                public static bool UseR
-                {
-                    get { return _useR.CurrentValue; }
-                }
+                public static bool UseQ => _useQ.CurrentValue;
+
+                public static bool UseW => _useW.CurrentValue;
+
+                public static bool UseR => _useR.CurrentValue;
 
                 static Combo()
                 {
@@ -96,22 +87,13 @@ namespace myAddon
                 private static readonly CheckBox _useW;
                 private static readonly CheckBox _farming;
                 private static readonly Slider _mana;
-                public static bool UseQ
-                {
-                    get { return _useQ.CurrentValue; }
-                }
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
-                }
-                public static bool Farming
-                {
-                	get { return _farming.CurrentValue; }
-                }
-                public static int Mana
-                {
-                    get { return _mana.CurrentValue; }
-                }
+                public static bool UseQ => _useQ.CurrentValue;
+
+                public static bool UseW => _useW.CurrentValue;
+
+                public static bool Farming => _farming.CurrentValue;
+
+                public static int Mana => _mana.CurrentValue;
 
                 static Harass()
                 {
@@ -133,16 +115,11 @@ namespace myAddon
             {
            	    private static readonly CheckBox _useQ;
                 private static readonly CheckBox _useW;
-                public static bool UseQ
-                {
-                    get { return _useQ.CurrentValue; }
-                }
-                public static bool UseW
-                {
-                    get { return _useW.CurrentValue; }
-                }
+                public static bool UseQ => _useQ.CurrentValue;
 
-                static LaneClear()
+               public static bool UseW => _useW.CurrentValue;
+
+               static LaneClear()
                 {
                     Menu.AddGroupLabel("LaneClear");
                    _useQ = Menu.Add("clearUseQ", new CheckBox("Use Q"));
@@ -156,11 +133,9 @@ namespace myAddon
           	public static class LastHit
             {
           		private static readonly CheckBox _useQ;
-                public static bool UseQ
-                {
-                    get { return _useQ.CurrentValue; }
-                }
-                static LastHit()
+                public static bool UseQ => _useQ.CurrentValue;
+
+          	    static LastHit()
                 {
                     Menu.AddGroupLabel("LastHit");
                    _useQ = Menu.Add("lastUseQ", new CheckBox("Use Q"));
@@ -176,20 +151,16 @@ namespace myAddon
             {
               private static readonly CheckBox _useE;
               private static readonly CheckBox _stacks;
-              private static readonly Menu Menu;
-                public static bool UseE
+
+ 		    public static bool UseE => _useE.CurrentValue;
+
+ 		    public static bool AutoStacks => _stacks.CurrentValue;
+
+ 		    static Misc()
                 {
-                    get { return _useE.CurrentValue; }
-                }
-                public static bool AutoStacks
-                {
-                    get { return _stacks.CurrentValue;}
-                }
-                static Misc()
-                {
-                    Menu = Config.Menu.AddSubMenu("Misc","misc");
-                    _useE = Menu.Add("autoE", new CheckBox("Auto E"));
-                    _stacks = Menu.Add("autoStacks", new CheckBox("Auto Stacks"));
+                    var menu = Menu.AddSubMenu("Misc","misc");
+                    _useE = menu.Add("autoE", new CheckBox("Auto E"));
+                    _stacks = menu.Add("autoStacks", new CheckBox("Auto Stacks"));
                 }
  
                 public static void Initialize()
@@ -203,8 +174,8 @@ namespace myAddon
                 private const int LineThickness = 10;
                 private static Vector2 BarOffset = new Vector2(0, 16);
                 private static Color _drawingColor;
-                private static readonly Menu Menu;
-                public static Color DrawingColor
+
+             public static Color DrawingColor
                 {
                     get { return _drawingColor; }
                     set { _drawingColor = Color.FromArgb(170, value); }
@@ -227,16 +198,14 @@ namespace myAddon
                     get { return _drawR; }
                     set { _drawR = Color.FromArgb(170, value); }
                 }
-                public static bool DrawDmg
+                public static bool DrawDmg => _drawdmg.CurrentValue;
+
+             static Draws()
                 {
-                    get { return _drawdmg.CurrentValue; }
+                    var menu = Menu.AddSubMenu("Draws","draw");
+                    _drawdmg = menu.Add("drawDmg", new CheckBox("Draw Dmg"));
                 }
-                static Draws()
-                {
-                    Menu = Config.Menu.AddSubMenu("Draws","draw");
-                    _drawdmg = Menu.Add("drawDmg", new CheckBox("Draw Dmg"));
-                }
- 
+
              public static void Initialize()
                 {  
                     DrawQ = Color.RoyalBlue;
@@ -267,7 +236,7 @@ namespace myAddon
                         var startPointW = new Vector2((int)(unit.HPBarPosition.X + BarOffset.X + damagePercentageW * BarWidth), (int)(unit.HPBarPosition.Y + BarOffset.Y) - 5);
                         var startPointR = new Vector2((int)(unit.HPBarPosition.X + BarOffset.X + damagePercentageR * BarWidth), (int)(unit.HPBarPosition.Y + BarOffset.Y) - 5);
                         var endPoint = new Vector2((int)(unit.HPBarPosition.X + BarOffset.X + currentHealthPercentage * BarWidth) + 1, (int)(unit.HPBarPosition.Y + BarOffset.Y) - 5);
-                        if (Config.Draws.DrawDmg)
+                        if (DrawDmg)
                         {
                         Drawing.DrawLine(startPointQ, endPoint, LineThickness, DrawQ);
                         Drawing.DrawLine(startPointW, endPoint, LineThickness, DrawW);

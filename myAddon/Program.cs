@@ -1,10 +1,7 @@
 ﻿using System;
 using EloBuddy;
-using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Rendering;
-using EloBuddy.SDK.Menu;
-using EloBuddy.SDK.Menu.Values;
 using SharpDX;
 namespace myAddon
 {
@@ -39,11 +36,6 @@ namespace myAddon
         {
             // Draw range circles of our spells
             Circle.Draw(Color.Red, SpellManager.Q.Range, Player.Instance.Position);
-            // TODO: Uncomment if you want those enabled aswell, but remember to enable them
-            // TODO: in the SpellManager aswell, otherwise you will get a NullReferenceException
-            //Circle.Draw(Color.Red, SpellManager.W.Range, Player.Instance.Position);
-            //Circle.Draw(Color.Red, SpellManager.E.Range, Player.Instance.Position);
-            //Circle.Draw(Color.Red, SpellManager.R.Range, Player.Instance.Position);
         }
     }
 }

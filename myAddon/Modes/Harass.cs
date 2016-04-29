@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
-using SharpDX;
 // Using the config like this makes your life easier, trust me
 using Settings = myAddon.Config.Modes.Harass;
 
@@ -14,7 +8,7 @@ namespace myAddon.Modes
 {
     public sealed class Harass : ModeBase
     {
-    	private	float Stacks = Player.GetBuff("pyromania").Count;
+    	private	float _stacks = Player.GetBuff("pyromania").Count;
         public override bool ShouldBeExecuted()
         {
             // Only execute this mode when the orbwalker is on harass mode
@@ -27,16 +21,16 @@ namespace myAddon.Modes
             if (Settings.UseQ && Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-                var Mob = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, Player.Instance.Position, Q.Range).Where(minion => minion.Health <= Player.Instance.GetSpellDamage(minion,SpellSlot.Q));
-                if (target != null && Stacks >= 2 && Settings.UseQ && Player.Instance.ManaPercent > Settings.Mana)
+                var mob = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, Player.Instance.Position, Q.Range).Where(minion => minion.Health <= Player.Instance.GetSpellDamage(minion,SpellSlot.Q));
+                if (target != null && _stacks >= 2 && Settings.UseQ && Player.Instance.ManaPercent > Settings.Mana)
                 {
                 	Orbwalker.DisableAttacking = true;
                     Q.Cast(target);
                 }
-                else if  (Mob != null && Settings.Farming)
+                else if  (mob != null && Settings.Farming)
                 {
                 	Orbwalker.DisableAttacking = true;
-                	Q.Cast(Mob.First());
+                	Q.Cast(mob.First());
                 }
             }
             if (Settings.UseW && Settings.UseW && W.IsReady())

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
 using Settings = myAddon.Config.Misc;
 namespace myAddon.Modes
 {
@@ -14,10 +8,10 @@ namespace myAddon.Modes
 	/// </summary>
 	public sealed class Misc : ModeBase
 	{
-		private float QMana = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.Q).SData.Mana;
-		private float WMana = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.W).SData.Mana;
-		private float RMana = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).SData.Mana;
-		private float MyMana = Player.Instance.Mana;
+		private readonly float _qMana = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.Q).SData.Mana;
+		private readonly float _wMana = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.W).SData.Mana;
+		private readonly float _rMana = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).SData.Mana;
+		private readonly float _myMana = Player.Instance.Mana;
 		   public override bool ShouldBeExecuted()
         {
 		   	return !Player.HasBuff("pyromania_particle");
@@ -44,15 +38,15 @@ namespace myAddon.Modes
         }
 		   private bool Mana()
 		   {
-		   	if (Q.IsReady() && !W.IsReady() && !R.IsReady() && QMana + 20  > MyMana)
+		   	if (Q.IsReady() && !W.IsReady() && !R.IsReady() && _qMana + 20  > _myMana)
 		   	{
 		   		return true;
 		   	}
-		   	if (Q.IsReady() && W.IsReady() && !R.IsReady() && QMana + WMana + 20 > MyMana)
+		   	if (Q.IsReady() && W.IsReady() && !R.IsReady() && _qMana + _wMana + 20 > _myMana)
 		   	{
 		   		return true;
 		   	}
-		   	if (Q.IsReady() && W.IsReady() && R.IsReady() && QMana + WMana + RMana + 20 > MyMana)
+		   	if (Q.IsReady() && W.IsReady() && R.IsReady() && _qMana + _wMana + _rMana + 20 > _myMana)
 		   	{
 		   		return true;
 		   	}

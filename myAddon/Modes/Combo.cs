@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EloBuddy;
+﻿using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
-using EloBuddy.SDK.Enumerations;
-using EloBuddy.SDK.Events;
 
 // Using the config like this makes your life easier, trust me
 using Settings = myAddon.Config.Modes.Combo;
@@ -13,7 +7,7 @@ namespace myAddon.Modes
 {
     public sealed class Combo : ModeBase
     {
-    	private	float Stacks = Player.GetBuff("pyromania").Count;
+    	private	float _stacks = Player.GetBuff("pyromania").Count;
         public override bool ShouldBeExecuted()
         {
             // Only execute this mode when the orbwalker is on combo mode
@@ -29,30 +23,30 @@ namespace myAddon.Modes
             if (Settings.UseQ && Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-                if (AutoAA(target))
+                if (AutoAa(target))
             	{
             		Orbwalker.DisableAttacking = false;
             	}
                 var predW  = W.GetPrediction(target).CastPosition;
                 var predR  = R.GetPrediction(target).CastPosition;
-                if (target != null && Player.Instance.Distance(target) < 600 && W.IsReady() && Settings.UseW && Stacks > 2)
+                if (target != null && Player.Instance.Distance(target) < 600 && W.IsReady() && Settings.UseW && _stacks > 2)
                 {
                 	Orbwalker.DisableAttacking = true;
                 	W.Cast(predW);
                 }
                 else if (target != null)
                 {
-                	if (Player.Instance.Distance(target) < 600 && R.IsReady()  && ComboDmg(target) > target.Health  && Stacks > 2 && Settings.UseR)
+                	if (Player.Instance.Distance(target) < 600 && R.IsReady()  && ComboDmg(target) > target.Health  && _stacks > 2 && Settings.UseR)
                 	{
                 		Orbwalker.DisableAttacking = true;
                 		R.Cast(predR);
                 	}
-                	if (Stacks <=2 && !W.IsReady())
+                	if (_stacks <=2 && !W.IsReady())
                 	{
                 		Orbwalker.DisableAttacking = true;
                 		Q.Cast(target);
                 	}
-                	if (Stacks >=2  && W.IsReady())
+                	if (_stacks >=2  && W.IsReady())
                 	{
                 		Orbwalker.DisableAttacking = true;
                 		Q.Cast(target);
@@ -67,7 +61,7 @@ namespace myAddon.Modes
             if (Settings.UseR && R.IsReady())
             {
             	var target = TargetSelector.GetTarget(R.Range, DamageType.Magical);
-            	if (AutoAA(target))
+            	if (AutoAa(target))
             	{
             		Orbwalker.DisableAttacking = false;
             	}
@@ -85,7 +79,7 @@ namespace myAddon.Modes
             			Orbwalker.DisableAttacking = true;
             			W.Cast(predW);
             		}
-            		if (ComboDmg(target) >= target.Health && Stacks > 2 && Q.IsReady() || W.IsReady() && !target.HasBuff("bansheesveil"))
+            		if (ComboDmg(target) >= target.Health && _stacks > 2 && Q.IsReady() || W.IsReady() && !target.HasBuff("bansheesveil"))
             		{
             			Orbwalker.DisableAttacking = true;
             			R.Cast(predR);
@@ -105,7 +99,7 @@ namespace myAddon.Modes
             if (Settings.UseW && W.IsReady())
             {
             	var target = TargetSelector.GetTarget(W.Range,DamageType.Magical);
-                if (AutoAA(target))
+                if (AutoAa(target))
             	{
             		Orbwalker.DisableAttacking = false;
             	}
@@ -123,7 +117,7 @@ namespace myAddon.Modes
             			W.Cast(predW);
             		}
             		
-            		if (!Q.IsReady() && !R.IsReady() && (target.Health > Player.Instance.GetSpellDamage(target,SpellSlot.W)*WReady() || (Stacks <= 3 && Stacks > 1)))
+            		if (!Q.IsReady() && !R.IsReady() && (target.Health > Player.Instance.GetSpellDamage(target,SpellSlot.W)*WReady() || (_stacks <= 3 && _stacks > 1)))
             		{
             			Orbwalker.DisableAttacking = true;
             			W.Cast(predW);
@@ -132,17 +126,17 @@ namespace myAddon.Modes
             }
         }
         
-        private float ComboDmg(Obj_AI_Base Target)
+        private float ComboDmg(Obj_AI_Base target)
         {
-        	if (Target != null)
+        	if (target != null)
         	{
-        		return (Player.Instance.GetSpellDamage(Target, SpellSlot.Q)*QReady())+(Player.Instance.GetSpellDamage(Target, SpellSlot.W)*WReady())+(Player.Instance.GetSpellDamage(Target, SpellSlot.R)*RReady());
+        		return (Player.Instance.GetSpellDamage(target, SpellSlot.Q)*QReady())+(Player.Instance.GetSpellDamage(target, SpellSlot.W)*WReady())+(Player.Instance.GetSpellDamage(target, SpellSlot.R)*RReady());
         	}
         	return 0;
         }
-        private bool AutoAA(Obj_AI_Base Target)
+        private bool AutoAa(Obj_AI_Base target)
         {
-        	if (Target !=  null && Player.Instance.Distance(Target) < 600 && Player.Instance.GetAutoAttackDamage(Target)*2 <= Target.Health)
+        	if (target !=  null && Player.Instance.Distance(target) < 600 && Player.Instance.GetAutoAttackDamage(target)*2 <= target.Health)
         	{
         		return true;
         	}

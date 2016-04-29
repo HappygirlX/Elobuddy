@@ -44,6 +44,5 @@ C:\Users\Admin\Desktop\myAddons\myAddon\bin\Debug\SharpDX.dll
 C:\Users\Admin\Desktop\myAddons\myAddon\bin\Debug\SharpDX.Direct3D9.dll
 C:\Users\Admin\Desktop\myAddons\myAddon\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Admin\Desktop\myAddons\myAddon\bin\Debug\EloBuddy.Sandbox.dll
-C:\Users\Admin\Desktop\myAddons\myAddon\obj\Debug\myAddon.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\myAddons\myAddon\obj\Debug\myAddon.exe
 C:\Users\Admin\Desktop\myAddons\myAddon\obj\Debug\myAddon.pdb
