@@ -1,6 +1,6 @@
 ﻿#region
 
-using Settings = myAddon.Config.Misc;
+using Settings = myAddon.Config;
 
 #endregion
 

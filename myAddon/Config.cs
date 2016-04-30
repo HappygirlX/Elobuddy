@@ -22,160 +22,71 @@ namespace myAddon
     // complex way that I use
     public static class Config
     {
-        private const string MenuName = "Annie";
+        private static CheckBox _useQCombo;
+        private static CheckBox _useWCombo;
+        private static CheckBox _useRCombo;
+        public static bool UseQCombo => _useQCombo.CurrentValue;
+        public static bool UseWCombo => _useWCombo.CurrentValue;
+        public static bool UseRCombo => _useRCombo.CurrentValue;
+        private static CheckBox _useQHarass;
+        private static CheckBox _useWHarass;
+        private static CheckBox _farmingHarass;
+        private static Slider _manaHarass;
+        public static bool UseQHarass => _useQHarass.CurrentValue;
+        public static bool UseWHarass => _useWHarass.CurrentValue;
+        public static bool FarmingHarass => _farmingHarass.CurrentValue;
+        public static int ManaHarass => _manaHarass.CurrentValue;
+        private static CheckBox _useQLaneClear;
+        private static CheckBox _useWLaneClear;
+        public static bool UseQLaneClear => _useQLaneClear.CurrentValue;
+        public static bool UseWLaneClear => _useWLaneClear.CurrentValue;
+        private static CheckBox _useQLastHit;
+        public static bool UseQLastHit => _useQLastHit.CurrentValue;
+        private static CheckBox _useEMisc;
+        private static CheckBox _stacksMisc;
+        public static bool UseEMisc => _useEMisc.CurrentValue;
+        public static bool AutoStacksMisc => _stacksMisc.CurrentValue;
 
-        private static readonly Menu Menu = MainMenu.AddMenu(MenuName, MenuName.ToLower());
+        private static Menu Main, Combo, Harass, LaneClear, LastHit, Misc, Draw;
 
-        static Config()
+        public static void MyMenu()
         {
             // Initialize the menu
+            Main = MainMenu.AddMenu("Annie", "Annie");
+            Combo = Main.AddSubMenu("Combo");
+            Harass = Main.AddSubMenu("Harass");
+            LaneClear = Main.AddSubMenu("LaneClear");
+            LastHit = Main.AddSubMenu("LastHit");
+            Misc = Main.AddSubMenu("Misc");
+            Draw = Main.AddSubMenu("Draw");
+
+            Combo.AddGroupLabel("Combo");
+            _useQCombo = Combo.Add("comboUseQ", new CheckBox("Use Q"));
+            _useWCombo = Combo.Add("comboUseW", new CheckBox("Use W"));
+            _useRCombo = Combo.Add("comboUseR", new CheckBox("Use R"));
+
+            Harass.AddGroupLabel("Harass");
+            _useQHarass = Harass.Add("harassUseQ", new CheckBox("Use Q"));
+            _useWHarass = Harass.Add("harassUseW", new CheckBox("Use W"));
+            _farmingHarass = Harass.Add("farming", new CheckBox("Farm(op)"));
+            _manaHarass = Harass.Add("harassMana", new Slider("Maximum mana usage in percent ({0}%)", 40));
+
+            LaneClear.AddGroupLabel("LaneClear");
+            _useQLaneClear = LaneClear.Add("clearUseQ", new CheckBox("Use Q"));
+            _useWLaneClear = LaneClear.Add("clearUseW", new CheckBox("Use W"));
+
+            LastHit.AddGroupLabel("LastHit");
+            _useQLastHit = LastHit.Add("lastUseQ", new CheckBox("Use Q"));
+
+            _useEMisc = Misc.Add("autoE", new CheckBox("Auto E"));
+            _stacksMisc = Misc.Add("autoStacks", new CheckBox("Auto Stacks"));
 
             // Initialize the modes
-            Modes.Initialize();
-            Misc.Initialize();
             Draws.Initialize();
         }
 
         public static void Initialize()
         {
-        }
-
-        public static class Modes
-        {
-            private static readonly Menu Menu;
-
-            static Modes()
-            {
-                // Initialize the menu
-                Menu = Config.Menu.AddSubMenu("Modes", "modes");
-
-                // Initialize all modes
-                Combo.Initialize();
-                Harass.Initialize();
-                LaneClear.Initialize();
-                LastHit.Initialize();
-            }
-
-            public static void Initialize()
-            {
-            }
-
-            public static class Combo
-            {
-                private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
-                private static readonly CheckBox _useR;
-
-                static Combo()
-                {
-                    // Initialize the menu values
-                    Menu.AddGroupLabel("Combo");
-                    _useQ = Menu.Add("comboUseQ", new CheckBox("Use Q"));
-                    _useW = Menu.Add("comboUseW", new CheckBox("Use W"));
-                    _useR = Menu.Add("comboUseR", new CheckBox("Use R"));
-                }
-
-                public static bool UseQ => _useQ.CurrentValue;
-
-                public static bool UseW => _useW.CurrentValue;
-
-                public static bool UseR => _useR.CurrentValue;
-
-                public static void Initialize()
-                {
-                }
-            }
-
-            public static class Harass
-            {
-                private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
-                private static readonly CheckBox _farming;
-                private static readonly Slider _mana;
-
-                static Harass()
-                {
-                    // Here is another option on how to use the menu, but I prefer the
-                    // way that I used in the combo class
-                    Menu.AddGroupLabel("Harass");
-
-                    _useQ = Menu.Add("harassUseQ", new CheckBox("Use Q"));
-                    _useW = Menu.Add("harassUseW", new CheckBox("Use W"));
-                    _farming = Menu.Add("farming", new CheckBox("Farm(op)"));
-                    _mana = Menu.Add("harassMana", new Slider("Maximum mana usage in percent ({0}%)", 40));
-                }
-
-                public static bool UseQ => _useQ.CurrentValue;
-
-                public static bool UseW => _useW.CurrentValue;
-
-                public static bool Farming => _farming.CurrentValue;
-
-                public static int Mana => _mana.CurrentValue;
-
-                public static void Initialize()
-                {
-                }
-            }
-
-            public static class LaneClear
-            {
-                private static readonly CheckBox _useQ;
-                private static readonly CheckBox _useW;
-
-                static LaneClear()
-                {
-                    Menu.AddGroupLabel("LaneClear");
-                    _useQ = Menu.Add("clearUseQ", new CheckBox("Use Q"));
-                    _useW = Menu.Add("clearUseW", new CheckBox("Use W"));
-                }
-
-                public static bool UseQ => _useQ.CurrentValue;
-
-                public static bool UseW => _useW.CurrentValue;
-
-                public static void Initialize()
-                {
-                }
-            }
-
-            public static class LastHit
-            {
-                private static readonly CheckBox _useQ;
-
-                static LastHit()
-                {
-                    Menu.AddGroupLabel("LastHit");
-                    _useQ = Menu.Add("lastUseQ", new CheckBox("Use Q"));
-                }
-
-                public static bool UseQ => _useQ.CurrentValue;
-
-                public static void Initialize()
-                {
-                }
-            }
-        }
-
-        public static class Misc
-        {
-            private static readonly CheckBox _useE;
-            private static readonly CheckBox _stacks;
-
-            static Misc()
-            {
-                var menu = Menu.AddSubMenu("Misc", "misc");
-                _useE = menu.Add("autoE", new CheckBox("Auto E"));
-                _stacks = menu.Add("autoStacks", new CheckBox("Auto Stacks"));
-            }
-
-            public static bool UseE => _useE.CurrentValue;
-
-            public static bool AutoStacks => _stacks.CurrentValue;
-
-            public static void Initialize()
-            {
-            }
         }
 
         private static class Draws
@@ -190,8 +101,7 @@ namespace myAddon
 
             static Draws()
             {
-                var menu = Menu.AddSubMenu("Draws", "draw");
-                _drawdmg = menu.Add("drawDmg", new CheckBox("Draw Dmg"));
+                _drawdmg = Draw.Add("drawDmg", new CheckBox("Draw Dmg"));
             }
 
             private static Color DrawingColor
