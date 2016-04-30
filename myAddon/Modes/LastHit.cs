@@ -3,7 +3,7 @@
 using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
-using Settings = myAddon.Config.Modes.LastHit;
+using Settings = myAddon.Config;
 
 #endregion
 
@@ -20,7 +20,7 @@ namespace myAddon.Modes
         public override void Execute()
         {
             Orbwalker.DisableAttacking = false;
-            if (Q.IsReady() && Settings.UseQ)
+            if (Q.IsReady() && Settings.UseQLastHit)
             {
                 var target =
                     EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy,

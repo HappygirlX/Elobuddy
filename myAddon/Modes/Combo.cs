@@ -3,7 +3,7 @@
 using EloBuddy;
 using EloBuddy.SDK;
 // Using the config like this makes your life easier, trust me
-using Settings = myAddon.Config.Modes.Combo;
+using Settings = myAddon.Config;
 
 #endregion
 
@@ -25,7 +25,7 @@ namespace myAddon.Modes
             // See how I used the Settings.UseQ here, this is why I love my way of using
             // the menu in the Config class!
             Orbwalker.DisableAttacking = false;
-            if (Settings.UseQ && Q.IsReady())
+            if (Settings.UseQCombo && Q.IsReady())
             {
                 var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
                 if (AutoAa(target))
@@ -34,7 +34,7 @@ namespace myAddon.Modes
                 }
                 var predW = W.GetPrediction(target).CastPosition;
                 var predR = R.GetPrediction(target).CastPosition;
-                if (target != null && Player.Instance.Distance(target) < 600 && W.IsReady() && Settings.UseW &&
+                if (target != null && Player.Instance.Distance(target) < 600 && W.IsReady() && Settings.UseWCombo &&
                     _stacks > 2)
                 {
                     Orbwalker.DisableAttacking = true;
@@ -43,7 +43,7 @@ namespace myAddon.Modes
                 else if (target != null)
                 {
                     if (Player.Instance.Distance(target) < 600 && R.IsReady() && ComboDmg(target) > target.Health &&
-                        _stacks > 2 && Settings.UseR)
+                        _stacks > 2 && Settings.UseRCombo)
                     {
                         Orbwalker.DisableAttacking = true;
                         R.Cast(predR);
@@ -65,7 +65,7 @@ namespace myAddon.Modes
                     }
                 }
             }
-            if (Settings.UseR && R.IsReady())
+            if (Settings.UseRCombo && R.IsReady())
             {
                 var target = TargetSelector.GetTarget(R.Range, DamageType.Magical);
                 if (AutoAa(target))
@@ -83,7 +83,7 @@ namespace myAddon.Modes
                 else if (target != null)
                 {
                     if (target.CountEnemiesInRange(W.Width) >= 2 && Player.HasBuff("pyromania_particle") && W.IsReady() &&
-                        Settings.UseW)
+                        Settings.UseWCombo)
                     {
                         Orbwalker.DisableAttacking = true;
                         W.Cast(predW);
@@ -110,7 +110,7 @@ namespace myAddon.Modes
                     }
                 }
             }
-            if (Settings.UseW && W.IsReady())
+            if (Settings.UseWCombo && W.IsReady())
             {
                 var target = TargetSelector.GetTarget(W.Range, DamageType.Magical);
                 if (AutoAa(target))

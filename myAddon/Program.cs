@@ -14,8 +14,6 @@ namespace myAddon
     {
         // Change this line to the champion you want to make the addon for,
         // watch out for the case being correct!
-        public const string ChampName = "Annie";
-
         public static void Main(string[] args)
         {
             Loading.OnLoadingComplete += OnLoadingComplete;
@@ -23,16 +21,14 @@ namespace myAddon
 
         private static void OnLoadingComplete(EventArgs args)
         {
-            // Verify the champion we made this addon for
-            if (Player.Instance.ChampionName != ChampName)
+            if (Player.Instance.Hero != Champion.Annie)
             {
-                // Champion is not the one we made this addon for,
-                // therefore we return
                 return;
             }
+            // Verify the champion we made this addon for
             // Initialize the classes that we need
             // Initialize the menu
-            Config.Initialize();
+            Config.MyMenu();
             SpellManager.Initialize();
             ModeManager.Initialize();
             Drawing.OnDraw += OnDraw;

@@ -13,7 +13,7 @@ namespace myAddon
 {
     public static class ModeManager
     {
-        static ModeManager()
+        public static void Mode()
         {
             // Initialize properties
             Modes = new List<ModeBase>();
@@ -36,7 +36,7 @@ namespace myAddon
             Game.OnTick += OnTick;
         }
 
-        private static List<ModeBase> Modes { get; }
+        private static List<ModeBase> Modes { get; set; }
 
         public static void Initialize()
         {

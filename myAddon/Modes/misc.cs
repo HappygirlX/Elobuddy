@@ -2,7 +2,7 @@
 
 using EloBuddy;
 using EloBuddy.SDK;
-using Settings = myAddon.Config.Misc;
+using Settings = myAddon.Config;
 
 #endregion
 
@@ -26,19 +26,19 @@ namespace myAddon.Modes
         public override void Execute()
         {
             var target = TargetSelector.GetTarget(10000, DamageType.Magical);
-            if (Settings.UseE && E.IsReady() && Mana())
+            if (Settings.UseEMisc && E.IsReady() && Mana())
             {
                 E.Cast();
             }
-            if (Settings.UseE && E.IsReady() && Player.Instance.IsInShopRange())
+            if (Settings.UseEMisc && E.IsReady() && Player.Instance.IsInShopRange())
             {
                 E.Cast();
             }
-            if (Settings.AutoStacks && Player.Instance.IsInShopRange() && W.IsReady())
+            if (Settings.AutoStacksMisc && Player.Instance.IsInShopRange() && W.IsReady())
             {
                 W.Cast();
             }
-            if (Settings.AutoStacks && target == null && W.IsReady() && Player.Instance.ManaPercent > 90 &&
+            if (Settings.AutoStacksMisc && target == null && W.IsReady() && Player.Instance.ManaPercent > 90 &&
                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) &&
                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) &&
                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
