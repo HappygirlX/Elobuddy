@@ -346,7 +346,8 @@ namespace WuAIO
         {
             if (Q.IsReady() && lasthit.IsActive("q"))
             {
-                var IEMinions = EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy, Player.ServerPosition, Q.Range).Where(minion => minion.Health <= damageManager.SpellDamage(minion, SpellSlot.Q)).OrderBy(minion => minion.Distance(Player.Position.To2D()));
+                var IEMinions =EntityManager.MinionsAndMonsters.GetLaneMinions(EntityManager.UnitTeam.Enemy,Player.Position, Q.Range)
+                        .Where(minion => minion.Health <= Player.GetSpellDamage(minion, SpellSlot.Q));
 
                 if (IEMinions.Any())
                 {
